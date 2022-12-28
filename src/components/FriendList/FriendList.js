@@ -1,23 +1,21 @@
 import './FriendList.modyle.css';
 import PropTypes from 'prop-types';
-export default function FriendList({ name, avatar, isOnline }) {
-  let bgColor = 'red';
-  if (isOnline) {
-    bgColor = 'green';
-  }
+import { FriendListItem } from '../FriendsListItem/FriendsListItem'
+export default function FriendList({ friends }) {
+
   return (
-    <li className="item">
-      <span className="status" style={{ backgroundColor: bgColor }}>
-        {isOnline}
-      </span>
-      <img className="avatar" src={avatar} alt={name} width="48" />
-      <p className="name">{name}</p>
-    </li>
+    <ul className='friend-list'>{friends.map(friend => <FriendListItem key={friend.id} avatar={friend.avatar} isOnline={friend.isOnline} name={friend.name} />)}</ul>
+
   );
 }
 
 FriendList.propTypes = {
-  name: PropTypes.string,
-  avatar: PropTypes.string,
-  isOnline: PropTypes.bool,
+  friends: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    isOnline: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired
+
+  })).isRequired,
+
 };

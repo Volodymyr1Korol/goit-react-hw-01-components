@@ -1,55 +1,26 @@
 import './Statistics.modyle.css';
 import PropTypes from 'prop-types';
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
 export default function Statistics({ title, stats }) {
-  let isTitle = false;
-  title !== '' ? isTitle = true : isTitle = false;
-  const titleOrg = <h2 className="title">{title}</h2>;
 
   return (
     <section className="statistics">
-      {isTitle ? titleOrg : null}
+      {title && <h2 className="title">{title}</h2>}
 
       <ul className="stat-list">
-        <li
+        {stats.map(stat => <li
           className="item-statistics"
-          style={{ backgroundColor: '#bead8f' }}
-          key={stats[0].id}
+          style={{ backgroundColor: getRandomHexColor() }}
+          key={stat.id}
         >
-          <span className="label">{stats[0].label}</span>
-          <span className="percentage">{stats[0].percentage}%</span>
-        </li>
-        <li
-          className="item-statistics"
-          style={{ backgroundColor: '#71601b' }}
-          key={stats[1].id}
-        >
-          <span className="label">{stats[1].label}</span>
-          <span className="percentage">{stats[1].percentage}%</span>
-        </li>
-        <li
-          className="item-statistics"
-          style={{ backgroundColor: '#832b45' }}
-          key={stats[2].id}
-        >
-          <span className="label">{stats[2].label}</span>
-          <span className="percentage">{stats[2].percentage}%</span>
-        </li>
-        <li
-          className="item-statistics"
-          style={{ backgroundColor: '#2ff13c' }}
-          key={stats[3].id}
-        >
-          <span className="label">{stats[3].label}</span>
-          <span className="percentage">{stats[3].percentage}%</span>
-        </li>
-        <li
-          className="item-statistics"
-          style={{ backgroundColor: '#1dfe81' }}
-          key={stats[4].id}
-        >
-          <span className="label">{stats[4].label}</span>
-          <span className="percentage">{stats[4].percentage}%</span>
-        </li>
+          <span className="label">{stat.label}</span>
+          <span className="percentage">{stat.percentage}%</span>
+        </li>)}
+
       </ul>
     </section>
   );
@@ -57,5 +28,5 @@ export default function Statistics({ title, stats }) {
 
 Statistics.propTypes = {
   title: PropTypes.string,
-  stats: PropTypes.array,
+  stats: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired, percentage: PropTypes.number.isRequired, label: PropTypes.string.isRequired })).isRequired,
 };
