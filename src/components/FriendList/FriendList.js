@@ -1,6 +1,6 @@
-import './FrendList.modyle.css';
+import './FriendList.modyle.css';
 import PropTypes from 'prop-types';
-export default function FrendList({ name, avatar, isOnline }) {
+export default function FriendList({ name, avatar, isOnline }) {
   let bgColor = 'red';
   if (isOnline) {
     bgColor = 'green';
@@ -16,7 +16,7 @@ export default function FrendList({ name, avatar, isOnline }) {
   );
 }
 
-FrendList.propTypes = {
+FriendList.propTypes = {
   name: PropTypes.string,
   avatar: PropTypes.string,
   isOnline: PropTypes.bool,

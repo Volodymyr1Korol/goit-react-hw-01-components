@@ -1,4 +1,4 @@
-import './TransactionHistory.modyle.css';
+import '../TransactionHistory/TransactionHistory.modyle.css';
 import PropTypes from 'prop-types';
 export default function TransactionHistory(props) {
   return (
